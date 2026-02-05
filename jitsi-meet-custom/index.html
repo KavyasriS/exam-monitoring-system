@@ -1,0 +1,151 @@
+<html itemscope itemtype="http://schema.org/Product" prefix="og: http://ogp.me/ns#" xmlns="http://www.w3.org/1999/html">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta name="theme-color" content="#2A3A4B">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="stylesheet" href="css/all.css">
+    <link rel="stylesheet" href="/css/proctor-alert.css" />
+
+    <link rel="manifest" id="manifest-placeholder">
+
+    <script>
+        function contextRoot(pathname) {
+            const contextRootEndIndex = pathname.lastIndexOf('/');
+
+            return (
+                contextRootEndIndex === -1
+                ? '/'
+                : pathname.substring(0, contextRootEndIndex + 1)
+            );
+        }
+        window.EXCALIDRAW_ASSET_PATH = 'libs/';
+        document.querySelector('#manifest-placeholder').setAttribute('href', window.location.origin + contextRoot(window.location.pathname) + 'manifest.json');
+
+        document.addEventListener('DOMContentLoaded', () => {
+            if (!JitsiMeetJS.app) {
+                return;
+            }
+
+            JitsiMeetJS.app.renderEntryPoint({
+                Component: JitsiMeetJS.app.entryPoints.APP
+            })
+
+            const isEmbedded = () => {
+                try {
+                    return window.self !== window.top;
+                } catch (e) {
+                    return true;
+                }
+            };
+
+            const isElectron = navigator.userAgent.includes('Electron');
+            const shouldRegisterWorker = !isElectron && !isEmbedded() && 'serviceWorker' in navigator;
+
+            if (shouldRegisterWorker) {
+                navigator.serviceWorker
+                    .register(window.location.origin + contextRoot(window.location.pathname) + 'pwa-worker.js')
+                    .then(reg => {
+                        console.log('Service worker registered.', reg);
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    });
+            }
+        });
+    </script>
+    <script>
+        if (window.navigator.userAgent.match(/(MSIE|Trident)/)) {
+            var roomName = encodeURIComponent(window.location.pathname);
+            window.location.pathname = 'static/recommendedBrowsers.html';
+        }
+
+        window.indexLoadedTime = window.performance.now();
+        window.addEventListener('load', function() {
+            window.loadedEventTime = window.performance.now();
+        });
+
+        var criticalFiles = [
+            "config.js",
+            "utils.js",
+            "do_external_connect.js",
+            "interface_config.js",
+            "lib-jitsi-meet.min.js",
+            "app.bundle.min.js",
+            "all.css"
+        ];
+        var loadErrHandler = function(e) {
+            var target = e.target;
+            var fileRef = (target.src ? target.src : target.href);
+            if (("SCRIPT" === target.tagName || "LINK" === target.tagName)
+                && criticalFiles.some(
+                    function(file) { return fileRef.indexOf(file) !== -1 })) {
+                window.onload = function() {
+                    var href = window.location.href;
+                    var retryMatch = href.match(/.+(\?|&)rCounter=(\d+)/);
+                    var retryCountStr = retryMatch ? retryMatch[2] : "0";
+                    var retryCount = Number.parseInt(retryCountStr);
+
+                    if (retryMatch == null) {
+                        var separator = href.indexOf("?") === -1 ? "?" : "&";
+                        var hashIdx = href.indexOf("#");
+                        if (hashIdx === -1) {
+                            href += separator + "rCounter=1";
+                        } else {
+                            var hashPart = href.substr(hashIdx);
+                            href = href.substr(0, hashIdx) + separator + "rCounter=1" + hashPart;
+                        }
+                    } else {
+                        var separator = retryMatch[1];
+                        href = href.replace(/(\?|&)rCounter=(\d+)/, separator + "rCounter=" + (retryCount + 1));
+                    }
+                    window.setTimeout(function () { window.location.replace(href); }, 10000);
+                };
+            }
+        };
+        window.addEventListener('error', loadErrHandler, true);
+    </script>
+    <script></script>
+    <script></script>
+    <script src="libs/lib-jitsi-meet.min.js?v=139"></script>
+    <script src="libs/app.bundle.min.js?v=139"></script>
+   
+    
+
+    <style>
+        /* Force-hides the container and the darkening overlay */
+        .atlaskit-portal-container, 
+        .atlaskit-portal, 
+        [role="dialog"], 
+        div[class*="atlaskit-portal"] { 
+            display: none !important; 
+            visibility: hidden !important; 
+            opacity: 0 !important;
+            pointer-events: none !important;
+        }
+    </style>
+    <script>
+        // Runs every 500ms to detect and delete the popup before you see it
+        setInterval(() => {
+            const dialogs = document.querySelectorAll('[role="dialog"]');
+            dialogs.forEach(dialog => {
+                // If it's the specific Time Limited or Generic Error box, delete it
+                if (dialog.innerText.includes("Time limited") || dialog.innerText.includes("OK")) {
+                    dialog.remove();
+                    console.log("AI Safety: Blocked connection timeout popup.");
+                }
+            });
+            // Cleanup the portal layers that darken the background
+            const portals = document.querySelectorAll('.atlaskit-portal, .atlaskit-portal-container');
+            portals.forEach(p => p.remove());
+        }, 500);
+    </script>
+    </head>
+  <body>
+    <noscript aria-hidden="true">
+        <div>JavaScript is disabled. </br>For this site to work you have to enable JavaScript.</div>
+    </noscript>
+    <div id="react" role="main"></div>
+  </body>
+</html>

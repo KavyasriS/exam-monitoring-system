@@ -1,0 +1,144 @@
+.dashboard-page {
+    background: linear-gradient(180deg, #3b6edc 0%, #4f7fe6 100%);
+    min-height: 100vh;
+}
+
+/* HEADER */
+.header {
+    padding: 32px 0 40px;
+    text-align: center;
+}
+
+.header-container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.header-text-title {
+    color: #ffffff;
+    font-size: 2.2rem;
+    font-weight: 500;
+}
+
+.header-text-subtitle {
+    color: #e3ecff;
+    margin-bottom: 24px;
+}
+
+/* JOIN BOX */
+.join-meeting-box {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.enter-room-input {
+    flex: 1;
+    height: 44px;
+    padding: 0 14px;
+    border-radius: 22px;
+    border: 1px solid #dadce0;
+}
+
+.primary-btn {
+    background: #1a73e8;
+    color: white;
+    border: none;
+    height: 44px;
+    padding: 0 20px;
+    border-radius: 22px;
+    cursor: pointer;
+}
+
+.secondary-btn {
+    background: #e8f0fe;
+    color: #1a73e8;
+    border: none;
+    height: 44px;
+    padding: 0 16px;
+    border-radius: 22px;
+    cursor: pointer;
+}
+
+/* DASHBOARD */
+.dashboard-cards {
+    max-width: 1200px;
+    margin: 40px auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    padding: 0 24px;
+}
+
+.dashboard-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.dashboard-card h2 {
+    margin-bottom: 16px;
+    font-size: 1.25rem;
+}
+
+/* MODAL */
+.schedule-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.schedule-modal-content {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 24px;
+    width: 420px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.scheduled-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.scheduled-item {
+    padding: 12px;
+    border-radius: 10px;
+    background: #f1f3f4;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.scheduled-item span {
+    font-size: 0.85rem;
+    color: #5f6368;
+}
+
+
+
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+.empty-state {
+    padding: 30px;
+    text-align: center;
+    color: #5f6368;
+    background: #f8f9fa;
+    border-radius: 12px;
+}
